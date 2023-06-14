@@ -108,18 +108,6 @@ function handelupdetclose (){
         </DialogActions>
       </Dialog>
 
-
-
-
-
-
-
-
-
-
-
-
-
         <Card sx={{ minWidth: 275,backgroundColor:"#1b3358",marginTop:"20px",}}>
         <CardContent >
   

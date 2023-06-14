@@ -139,6 +139,7 @@ return(
         <ReplyAllIcon/> <Typography variant='h6'>Addition</Typography>
       </Button>
         </Grid>
+        
         <Grid  item xs={8}>
         <TextField sx={{width:"100%"}} id="outlined-basic"
         value={inputvalue}
