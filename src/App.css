@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+ 
+}
+body{
+  background-color: #294d61 !important;
+  
+}
+
+
+
+
+
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@font-face {
+  font-family:A ;
+  src: url("../public/font/Alexandria-Black.ttf");
+  font-weight:900 ;
+}
+@font-face {
+  font-family:A ;
+  src: url("../public/font/Alexandria-Regular.ttf");
+  font-weight:normal ;
+}
+@font-face {
+  font-family:A ;
+  src: url("../public/font/Alexandria-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family:A ;
+  src: url("../public/font/Alexandria-Light.ttf");
+  font-weight:200 ;
+}
