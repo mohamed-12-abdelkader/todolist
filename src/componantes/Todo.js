@@ -19,35 +19,35 @@ import TextField from '@mui/material/TextField';
 
 import { useState } from 'react';
 
-export default function Todo({todo,handelchick,handeldeletclick,updettodo,setupdettodo,handelupdetclick}){
-    let [showdlete,setshowdelet]=useState(false)
+export default function Todo({todo,handlechick,handledeletclick,updettodo,setupdettodo,handleupdetclick}){
+    let [showdelet,setshowdelet]=useState(false)
     let [showupdet,setshwoupdet]=useState(false)
 
 
-function handelupdet (){
-    handelupdetclick(todo.id)
+function handleupdet (){
+    handleupdetclick(todo.id)
     setshwoupdet(false)
     
 }
 
-function handelchickClick(){
-    handelchick(todo.id)
+function handlechickClick(){
+    handlechick(todo.id)
 }
-function handelDelet(){
-    handeldeletclick(todo.id)
+function handleDelet(){
+    handledeletclick(todo.id)
 }    
 
-function handelShowclick(){
+function handleShowclick(){
 setshowdelet(true)
 }
-function handelShoUpdetclick(){
+function handleShoUpdetclick(){
 setshwoupdet(true)
 }
-function handelclose (){
+function handleclose (){
 setshowdelet(false)
 }
 
-function handelupdetclose (){
+function handleupdetclose (){
     setshwoupdet(false)
 }
 
@@ -59,8 +59,8 @@ function handelupdetclose (){
 
 
         <Dialog
-       onClose={handelclose}
-        open={showdlete}
+       onClose={handleclose}
+        open={showdelet}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -73,8 +73,8 @@ function handelupdetclose (){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={ handelDelet} >Yes, delete</Button>
-          <Button onClick={handelclose} autoFocus>
+          <Button onClick={ handleDelet} >Yes, delete</Button>
+          <Button onClick={handleclose} autoFocus>
           cancel
           </Button>
         </DialogActions>
@@ -85,7 +85,7 @@ function handelupdetclose (){
 
 
   
-      <Dialog open={showupdet} onClose={handelupdetclose}>
+      <Dialog open={showupdet} onClose={handleupdetclose}>
         <DialogTitle>Modify the task</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -103,8 +103,8 @@ function handelupdetclose (){
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handelupdetclose}>Cancel</Button>
-          <Button onClick={handelupdet } >Edit</Button>
+          <Button onClick={handleupdetclose}>Cancel</Button>
+          <Button onClick={handleupdet } >Edit</Button>
         </DialogActions>
       </Dialog>
 
@@ -115,14 +115,14 @@ function handelupdetclose (){
     
         <Grid  item xs={6} md={4}>
         <Stack  direction="row" spacing={1}>
-      <IconButton onClick={ handelShowclick}  style={{color:"#b51a2b",backgroundColor:"white",border:"solid 3px #b51a2b"}} aria-label="delete">
+      <IconButton onClick={ handleShowclick}  style={{color:"#b51a2b",backgroundColor:"white",border:"solid 3px #b51a2b"}} aria-label="delete">
         <DeleteIcon />
       </IconButton>
-      <IconButton onClick={handelShoUpdetclick}  style={{color:"#68A8CF",backgroundColor:"white",border:"solid 3px #68A8CF"}} aria-label="delete">
+      <IconButton onClick={handleShoUpdetclick}  style={{color:"#68A8CF",backgroundColor:"white",border:"solid 3px #68A8CF"}} aria-label="delete">
         <EditIcon />
       </IconButton>
       
-      <IconButton onClick={ handelchickClick} style={{color:todo.isCompleted?"white":"green",backgroundColor:todo.isCompleted?"green": "white",border:"solid 3px green"}} color="secondary" aria-label="add an alarm">
+      <IconButton onClick={ handlechickClick} style={{color:todo.isCompleted?"white":"green",backgroundColor:todo.isCompleted?"green": "white",border:"solid 3px green"}} color="secondary" aria-label="add an alarm">
         <CheckIcon />
       </IconButton>
        

@@ -36,7 +36,7 @@ settodostype(e.target.value)
 
 
 
-function handelupdetclick(todooId){
+function handleupdetclick(todooId){
     const updettodos =todos.map((t)=>{
      if(t.id===todooId){
          return {...t, title: updettodo}
@@ -50,7 +50,7 @@ function handelupdetclick(todooId){
  }
 
 
-function handeldeletclick(todooId){
+function handledeletclick(todooId){
     settodos(
         todos.filter(a =>
           a.id !==todooId
@@ -59,7 +59,7 @@ function handeldeletclick(todooId){
 
 
 
-function handelchick(todoId){
+function handlechick(todoId){
    const handelchick=todos.map((t)=>{
     if(t.id === todoId){
 t.isCompleted =!t.isCompleted
@@ -87,10 +87,9 @@ if(todostype==="completed"){
 }
 
 let todojsx=todos.map((t)=>{
-    return<Todo key={t.id} todo={t} handelchick={handelchick} handeldeletclick={handeldeletclick} updettodo={updettodo} setupdettodo={setupdettodo} handelupdetclick={handelupdetclick} />
+    return<Todo key={t.id} todo={t} handlechick={handlechick} handledeletclick={handledeletclick} updettodo={updettodo} setupdettodo={setupdettodo} handleupdetclick={handleupdetclick} />
 })
  
-
 
 
 function handleAddclick(){
@@ -99,8 +98,6 @@ function handleAddclick(){
     ])
     setinputvalue("")
 }
-
-
 
 
 return(
@@ -139,7 +136,7 @@ return(
         <ReplyAllIcon/> <Typography variant='h6'>Addition</Typography>
       </Button>
         </Grid>
-        
+
         <Grid  item xs={8}>
         <TextField sx={{width:"100%"}} id="outlined-basic"
         value={inputvalue}
@@ -150,9 +147,6 @@ return(
       </Grid>
       </CardContent>
     </Card>
-
-
-
     </Container>
     </>
 )
