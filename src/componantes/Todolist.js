@@ -21,36 +21,37 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function Todolist(){
 
-let [inputvalue,setinputvalue]=useState("")
-let [updettodo,setupdettodo]=useState()
+let [inputValue,setinputValue]=useState("")
+let [updateTodo,setupdateTodo]=useState()
 
-let [todostype,settodostype]=useState("all")
+let [todosType,settodosType]=useState("all")
 
 let [todos,settodos]=useState([])
 
 
 
-function changetype (e){
-settodostype(e.target.value)
+function changeType(e) {
+  settodosType(e.target.value);
 }
 
 
 
-function handleupdetclick(todooId){
+
+function ModifyTheTask(todooId){
     const updettodos =todos.map((t)=>{
      if(t.id===todooId){
-         return {...t, title: updettodo}
+         return {...t, title:updateTodo}
      }else{
          return t;
      }
     })
-    setupdettodo("")
+    setupdateTodo("")
     settodos(updettodos)
     
  }
 
 
-function handledeletclick(todooId){
+function DeleteTheTask(todooId){
     settodos(
         todos.filter(a =>
           a.id !==todooId
@@ -59,14 +60,14 @@ function handledeletclick(todooId){
 
 
 
-function handlechick(todoId){
-   const handelchick=todos.map((t)=>{
+function handleToggleComplete(todoId){
+   const handleToggleComplete=todos.map((t)=>{
     if(t.id === todoId){
 t.isCompleted =!t.isCompleted
     }
     return t
    })
-   settodos (handelchick)
+   settodos (handleToggleComplete)
 }
 
 
@@ -80,23 +81,23 @@ const filtered2 = todos.filter(todos => {
 
 //let  todosrendered=todos
 
-if(todostype==="completed"){
+if(todosType==="completed"){
   todos=filtered
-}else if(todostype==="no-completed"){
+}else if(todosType==="no-completed"){
   todos=filtered2
 }
 
 let todojsx=todos.map((t)=>{
-    return<Todo key={t.id} todo={t} handlechick={handlechick} handledeletclick={handledeletclick} updettodo={updettodo} setupdettodo={setupdettodo} handleupdetclick={handleupdetclick} />
+    return<Todo key={t.id} todo={t} handleToggleComplete={handleToggleComplete} DeleteTheTask={DeleteTheTask} updateTodo={updateTodo} setupdateTodo={setupdateTodo} ModifyTheTask={ModifyTheTask} />
 })
  
 
 
-function handleAddclick(){
+function handleAddTodo(){
     settodos([
-        ...todos,{id:uuidv4(),title:inputvalue}
+        ...todos,{id:uuidv4(),title:inputValue}
     ])
-    setinputvalue("")
+    setinputValue("")
 }
 
 
@@ -112,9 +113,9 @@ return(
           <hr />
        
     <ToggleButtonGroup
-   onChange={changetype}
+   onChange={changeType}
    exclusive
-   value={todostype}
+   value={todosType}
    aria-label="text alignment"
  >
    <ToggleButton value="no-completed" >not accomplished</ToggleButton>
@@ -132,15 +133,15 @@ return(
       <Grid container spacing={2}>
         
         <Grid  item xs={4}>
-        <Button  sx={{width:"100%",height:"100%",textTransform:"capitalize"}} variant="contained" onClick={handleAddclick } >
+        <Button  sx={{width:"100%",height:"100%",textTransform:"capitalize"}} variant="contained" onClick={handleAddTodo } >
         <ReplyAllIcon/> <Typography variant='h6'>Addition</Typography>
       </Button>
         </Grid>
 
         <Grid  item xs={8}>
         <TextField sx={{width:"100%"}} id="outlined-basic"
-        value={inputvalue}
-        onChange={e=> setinputvalue(e.target.value)}
+        value={inputValue}
+        onChange={e=> setinputValue(e.target.value)}
         label="addition task"
          variant="outlined" />
         </Grid>

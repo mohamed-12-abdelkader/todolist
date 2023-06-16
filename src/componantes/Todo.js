@@ -19,36 +19,36 @@ import TextField from '@mui/material/TextField';
 
 import { useState } from 'react';
 
-export default function Todo({todo,handlechick,handledeletclick,updettodo,setupdettodo,handleupdetclick}){
-    let [showdelet,setshowdelet]=useState(false)
-    let [showupdet,setshwoupdet]=useState(false)
+export default function Todo({todo,handleToggleComplete,DeleteTheTask,updateTodo,setupdateTodo,ModifyTheTask}){
+    let [showDelete,setshowDelete]=useState(false)
+    let [showUpdate,setshowUpdate]=useState(false)
 
 
-function handleupdet (){
-    handleupdetclick(todo.id)
-    setshwoupdet(false)
+function ModifyTheTasks (){
+  ModifyTheTask(todo.id)
+    setshowUpdate(false)
     
 }
 
-function handlechickClick(){
-    handlechick(todo.id)
+function  handleToggleCompleted(){
+  handleToggleComplete(todo.id)
 }
-function handleDelet(){
-    handledeletclick(todo.id)
+function handleDelete(){
+  DeleteTheTask(todo.id)
 }    
 
 function handleShowclick(){
-setshowdelet(true)
+setshowDelete(true)
 }
 function handleShoUpdetclick(){
-setshwoupdet(true)
+setshowUpdate(true)
 }
-function handleclose (){
-setshowdelet(false)
+function CloseDialogDelete(){
+setshowDelete(false)
 }
 
-function handleupdetclose (){
-    setshwoupdet(false)
+function CloseDialogEdit (){
+    setshowUpdate(false)
 }
 
 
@@ -59,8 +59,8 @@ function handleupdetclose (){
 
 
         <Dialog
-       onClose={handleclose}
-        open={showdelet}
+       onClose={CloseDialogDelete}
+        open={showDelete}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -73,8 +73,8 @@ function handleupdetclose (){
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={ handleDelet} >Yes, delete</Button>
-          <Button onClick={handleclose} autoFocus>
+          <Button onClick={ handleDelete} >Yes, delete</Button>
+          <Button onClick={CloseDialogDelete} autoFocus>
           cancel
           </Button>
         </DialogActions>
@@ -85,7 +85,7 @@ function handleupdetclose (){
 
 
   
-      <Dialog open={showupdet} onClose={handleupdetclose}>
+      <Dialog open={showUpdate} onClose={CloseDialogEdit}>
         <DialogTitle>Modify the task</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -96,15 +96,15 @@ function handleupdetclose (){
             margin="dense"
             id="name"
             label="Modify the task"
-         value={updettodo}
-         onChange={e=>setupdettodo(e.target.value)}
+         value={updateTodo}
+         onChange={e=>setupdateTodo(e.target.value)}
            
             variant="standard"
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleupdetclose}>Cancel</Button>
-          <Button onClick={handleupdet } >Edit</Button>
+          <Button onClick={CloseDialogEdit}>Cancel</Button>
+          <Button onClick={ModifyTheTasks } >Edit</Button>
         </DialogActions>
       </Dialog>
 
@@ -122,7 +122,7 @@ function handleupdetclose (){
         <EditIcon />
       </IconButton>
       
-      <IconButton onClick={ handlechickClick} style={{color:todo.isCompleted?"white":"green",backgroundColor:todo.isCompleted?"green": "white",border:"solid 3px green"}} color="secondary" aria-label="add an alarm">
+      <IconButton onClick={ handleToggleCompleted} style={{color:todo.isCompleted?"white":"green",backgroundColor:todo.isCompleted?"green": "white",border:"solid 3px green"}} color="secondary" aria-label="add an alarm">
         <CheckIcon />
       </IconButton>
        
