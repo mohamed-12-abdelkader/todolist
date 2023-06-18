@@ -1,6 +1,5 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-//import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
@@ -21,23 +20,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function Todolist(){
 
-let [inputValue,setinputValue]=useState("")
-let [updateTodo,setupdateTodo]=useState()
+const [inputValue, setInputValue] = useState('');
+const [updateTodo, setUpdateTodo] = useState('');
+const [todosType, setTodosType] = useState('all');
+const [todos, setTodos] = useState([]);
 
-let [todosType,settodosType]=useState("all")
-
-let [todos,settodos]=useState([])
 
 
 
 function changeType(e) {
-  settodosType(e.target.value);
+  setTodosType(e.target.value);
 }
 
 
 
 
-function ModifyTheTask(todooId){
+function modifyTask(todooId){
     const updettodos =todos.map((t)=>{
      if(t.id===todooId){
          return {...t, title:updateTodo}
@@ -45,14 +43,14 @@ function ModifyTheTask(todooId){
          return t;
      }
     })
-    setupdateTodo("")
-    settodos(updettodos)
+    setUpdateTodo("")
+    setTodos(updettodos)
     
  }
 
 
-function DeleteTheTask(todooId){
-    settodos(
+function deleteTask(todooId){
+  setTodos(
         todos.filter(a =>
           a.id !==todooId
         ))
@@ -61,13 +59,13 @@ function DeleteTheTask(todooId){
 
 
 function handleToggleComplete(todoId){
-   const handleToggleComplete=todos.map((t)=>{
+   const updatedTodos=todos.map((t)=>{
     if(t.id === todoId){
 t.isCompleted =!t.isCompleted
     }
     return t
    })
-   settodos (handleToggleComplete)
+   setTodos (updatedTodos)
 }
 
 
@@ -79,25 +77,25 @@ const filtered2 = todos.filter(todos => {
   return !todos.isCompleted 
 });
 
-//let  todosrendered=todos
+let  Todos=todos
 
 if(todosType==="completed"){
-  todos=filtered
+  Todos=filtered
 }else if(todosType==="no-completed"){
-  todos=filtered2
+  Todos=filtered2
 }
 
-let todojsx=todos.map((t)=>{
-    return<Todo key={t.id} todo={t} handleToggleComplete={handleToggleComplete} DeleteTheTask={DeleteTheTask} updateTodo={updateTodo} setupdateTodo={setupdateTodo} ModifyTheTask={ModifyTheTask} />
+let todojsx= Todos.map((t)=>{
+    return<Todo key={t.id} todo={t} handleToggleComplete={handleToggleComplete} deleteTask={deleteTask} updateTodo={updateTodo} setUpdateTodo={setUpdateTodo} modifyTask={modifyTask} />
 })
  
 
 
 function handleAddTodo(){
-    settodos([
+  setTodos([
         ...todos,{id:uuidv4(),title:inputValue}
     ])
-    setinputValue("")
+    setInputValue("")
 }
 
 
@@ -141,7 +139,7 @@ return(
         <Grid  item xs={8}>
         <TextField sx={{width:"100%"}} id="outlined-basic"
         value={inputValue}
-        onChange={e=> setinputValue(e.target.value)}
+        onChange={e=> setInputValue(e.target.value)}
         label="addition task"
          variant="outlined" />
         </Grid>
@@ -153,4 +151,4 @@ return(
 )
 
 
-}
+}  
