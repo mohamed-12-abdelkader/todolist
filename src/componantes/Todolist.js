@@ -68,7 +68,7 @@ t.isCompleted =!t.isCompleted
    setTodos (updatedTodos)
 }
 
-
+  
 const filtered = todos.filter(todos => {
   return todos.isCompleted 
 });
@@ -92,7 +92,7 @@ let todojsx= Todos.map((t)=>{
 
 function handleAddTodo(event) {
   event.preventDefault();
-  if (inputValue.length > 1) {
+  if (inputValue.length > 0) {
     setTodos([
      ...todos,
       { id: uuidv4(), title: inputValue }
