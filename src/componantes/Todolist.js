@@ -90,13 +90,17 @@ let todojsx= Todos.map((t)=>{
 })
  
 
-
-function handleAddTodo(){
-  setTodos([
-        ...todos,{id:uuidv4(),title:inputValue}
-    ])
-    setInputValue("")
+function handleAddTodo(event) {
+  event.preventDefault();
+  if (inputValue.length > 1) {
+    setTodos([
+     ...todos,
+      { id: uuidv4(), title: inputValue }
+    ]);
+    setInputValue("");
+  }
 }
+
 
 
 return(
@@ -131,7 +135,7 @@ return(
       <Grid container spacing={2}>
         
         <Grid  item xs={4}>
-        <Button  sx={{width:"100%",height:"100%",textTransform:"capitalize"}} variant="contained" onClick={handleAddTodo } >
+        <Button  sx={{width:"100%",height:"100%",textTransform:"capitalize"}} variant="contained" onClick={handleAddTodo} >
         <ReplyAllIcon/> <Typography variant='h6'>Addition</Typography>
       </Button>
         </Grid>
