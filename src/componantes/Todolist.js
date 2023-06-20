@@ -9,7 +9,7 @@ import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Todo from './Todo';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -25,7 +25,11 @@ const [updateTodo, setUpdateTodo] = useState('');
 const [todosType, setTodosType] = useState('all');
 const [todos, setTodos] = useState([]);
 
-
+useEffect(()=>{
+  console.log("mm")
+  const storageTodos=JSON.parse( localStorage.getItem("todos"))
+  setTodos(storageTodos) 
+},[])
 
 
 function changeType(e) {
@@ -36,7 +40,7 @@ function changeType(e) {
 
 
 function modifyTask(todooId){
-    const updettodos =todos.map((t)=>{
+    const updatedTodos =todos.map((t)=>{
      if(t.id===todooId){
          return {...t, title:updateTodo}
      }else{
@@ -44,16 +48,17 @@ function modifyTask(todooId){
      }
     })
     setUpdateTodo("")
-    setTodos(updettodos)
-    
+    setTodos(updatedTodos)
+    localStorage.setItem("todos",JSON.stringify(updatedTodos))
  }
 
 
 function deleteTask(todooId){
-  setTodos(
-        todos.filter(a =>
-          a.id !==todooId
-        ))
+  const updatedTodos=(todos.filter(a =>
+    a.id !==todooId
+  ))
+  setTodos(updatedTodos)
+  localStorage.setItem("todos",JSON.stringify(updatedTodos))
 }
 
 
@@ -66,6 +71,7 @@ t.isCompleted =!t.isCompleted
     return t
    })
    setTodos (updatedTodos)
+   localStorage.setItem("todos",JSON.stringify(updatedTodos))
 }
 
   
@@ -93,10 +99,12 @@ let todojsx= Todos.map((t)=>{
 function handleAddTodo(event) {
   event.preventDefault();
   if (inputValue.length > 0) {
-    setTodos([
-     ...todos,
-      { id: uuidv4(), title: inputValue }
-    ]);
+    const updatedTodos=[
+      ...todos,
+       { id: uuidv4(), title: inputValue }
+     ]
+    setTodos(updatedTodos);
+   localStorage.setItem("todos",JSON.stringify(updatedTodos))
     setInputValue("");
   }
 }
