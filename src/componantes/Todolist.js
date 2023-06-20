@@ -26,7 +26,7 @@ const [todosType, setTodosType] = useState('all');
 const [todos, setTodos] = useState([]);
 
 useEffect(()=>{
-  console.log("mm")
+  
   const storageTodos=JSON.parse( localStorage.getItem("todos"))
   setTodos(storageTodos) 
 },[])
