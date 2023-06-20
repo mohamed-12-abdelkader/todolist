@@ -49,6 +49,7 @@ function modifyTask(todooId){
     })
     setUpdateTodo("")
     setTodos(updatedTodos)
+
     localStorage.setItem("todos",JSON.stringify(updatedTodos))
  }
 
@@ -58,6 +59,7 @@ function deleteTask(todooId){
     a.id !==todooId
   ))
   setTodos(updatedTodos)
+ 
   localStorage.setItem("todos",JSON.stringify(updatedTodos))
 }
 
@@ -71,6 +73,7 @@ t.isCompleted =!t.isCompleted
     return t
    })
    setTodos (updatedTodos)
+  
    localStorage.setItem("todos",JSON.stringify(updatedTodos))
 }
 
@@ -99,11 +102,12 @@ let todojsx= Todos.map((t)=>{
 function handleAddTodo(event) {
   event.preventDefault();
   if (inputValue.length > 0) {
-    const updatedTodos=[
+    const  updatedTodos=[
       ...todos,
-       { id: uuidv4(), title: inputValue }
-     ]
+      { id: uuidv4(), title: inputValue }
+    ]
     setTodos(updatedTodos);
+
    localStorage.setItem("todos",JSON.stringify(updatedTodos))
     setInputValue("");
   }
