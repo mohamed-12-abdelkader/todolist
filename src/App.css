@@ -4,12 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
  
 }
 body{
   background-color: #294d61 !important;
-  
+
 }
 @font-face {
   font-family:A ;
