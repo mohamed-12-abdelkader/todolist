@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  
+  margin-top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,6 @@
 }
 body{
   background-color: #294d61 !important;
-
 }
 @font-face {
   font-family:A ;
