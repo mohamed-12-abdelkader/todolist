@@ -9,7 +9,7 @@ import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Todo from './Todo';
-import { useState ,useEffect} from 'react';
+import { useState  } from 'react';
 
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -18,40 +18,38 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
+
 export default function Todolist(){
+
+const initalData=JSON.parse(localStorage.getItem("todos"))?JSON.parse(localStorage.getItem("todos")):[]
 
 const [inputValue, setInputValue] = useState('');
 const [updateTodo, setUpdateTodo] = useState('');
 const [todosType, setTodosType] = useState('all');
-const [todos, setTodos] = useState([]);
+const [todos, setTodos] = useState(initalData);
 
-useEffect(()=>{
-  
-  const storageTodos=JSON.parse( localStorage.getItem("todos"))
-  setTodos(storageTodos) 
-},[])
+const setToLocal=()=>{
+  localStorage.setItem("todos",JSON.stringify(todos))
+}
 
 
 function changeType(e) {
   setTodosType(e.target.value);
 }
 
-
-
-
 function modifyTask(todooId){
-    const updatedTodos =todos.map((t)=>{
-     if(t.id===todooId){
-         return {...t, title:updateTodo}
-     }else{
-         return t;
-     }
-    })
-    setUpdateTodo("")
-    setTodos(updatedTodos)
+  const updatedTodos =todos.map((t)=>{
+   if(t.id===todooId){
+       return {...t, title:updateTodo}
+   }else{
+       return t;
+   }
+  })
+  setUpdateTodo("")
 
-    localStorage.setItem("todos",JSON.stringify(updatedTodos))
- }
+  setTodos(updatedTodos)
+
+}
 
 
 function deleteTask(todooId){
@@ -59,25 +57,24 @@ function deleteTask(todooId){
     a.id !==todooId
   ))
   setTodos(updatedTodos)
- 
-  localStorage.setItem("todos",JSON.stringify(updatedTodos))
+  
 }
-
 
 
 function handleToggleComplete(todoId){
-   const updatedTodos=todos.map((t)=>{
-    if(t.id === todoId){
+  const updatedTodos=todos.map((t)=>{
+   if(t.id === todoId){
 t.isCompleted =!t.isCompleted
-    }
-    return t
-   })
-   setTodos (updatedTodos)
+   }
+   return t
+  })
+  setTodos (updatedTodos)
   
-   localStorage.setItem("todos",JSON.stringify(updatedTodos))
 }
 
-  
+
+
+
 const filtered = todos.filter(todos => {
   return todos.isCompleted 
 });
@@ -99,6 +96,8 @@ let todojsx= Todos.map((t)=>{
 })
  
 
+
+
 function handleAddTodo(event) {
   event.preventDefault();
   if (inputValue.length > 0) {
@@ -108,10 +107,15 @@ function handleAddTodo(event) {
     ]
     setTodos(updatedTodos);
 
-   localStorage.setItem("todos",JSON.stringify(updatedTodos))
     setInputValue("");
   }
 }
+
+
+setToLocal()
+
+
+
 
 
 
